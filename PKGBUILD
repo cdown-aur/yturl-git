@@ -1,3 +1,5 @@
+# Maintainer: Chris Down <chris@chrisdown.name>
+
 pkgname=yturl-git
 _gitname=yturl
 pkgver=0
