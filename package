@@ -1,0 +1,25 @@
+#!/bin/bash
+
+git clean -dfx
+rm -rf src/
+
+makepkg -s
+makepkg --source
+
+. PKGBUILD
+
+tag="$pkgver-$pkgrel"
+
+if git show "$tag" &>/dev/null; then
+    printf 'fatal: tag "%s" already exists\n' "$tag"
+    exit 1
+fi
+
+git commit -am "Release: $tag"
+git tag -a "$tag" -m "$tag"
+
+cat << EOF
+burp *.src.tar.gz
+git push origin HEAD
+git push origin $tag
+EOF
