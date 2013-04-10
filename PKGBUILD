@@ -2,7 +2,7 @@
 
 pkgname=yturl-git
 _gitname=yturl
-pkgver=0
+pkgver=20130410084623.8b993e4
 pkgrel=1
 pkgdesc="Get direct media URLs to YouTube videos"
 license=( "MIT" )
