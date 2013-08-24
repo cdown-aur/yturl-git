@@ -3,29 +3,14 @@
 pkgname=yturl-git
 _gitname=yturl
 pkgver=20130824041733.85d42ac
-pkgrel=1
-pkgdesc="Get direct media URLs to YouTube videos"
-license=( "MIT" )
-url="https://github.com/cdown/yturl"
-
-if type -p python2 &>/dev/null && ! type -p python &>/dev/null; then
-    _use_python_2=1
-    depends=( "python2" )
-else
-    _use_python_2=0
-    depends=( "python" )
-fi
-
-arch=( "any" )
-makedepends=( "git" )
-conflicts=( "yturl" )
-provides=( "yturl" )
-source=(
-    "git://github.com/cdown/yturl.git"
-)
-md5sums=(
-    "SKIP"
-)
+pkgrel=2
+pkgdesc="Print direct URLs to YouTube videos."
+url=http://github.com/cdown/yturl
+arch=( any )
+license=( MIT )
+depends=( python )
+source=( git://github.com/cdown/yturl.git )
+md5sums=( SKIP )
 
 pkgver() {
     cd "$_gitname"
@@ -33,9 +18,6 @@ pkgver() {
 }
 
 package() {
-    if (( _use_python_2 )); then
-        sed -i '1s|^.*$|#!/usr/bin/env python2|g' "$_gitname/yturl"
-    fi
-
-    install -Dm755 "$_gitname/yturl" "$pkgdir/usr/bin/yturl"
+    cd "$_gitname"
+    python setup.py install --root="$pkgdir"
 }
